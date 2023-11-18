@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    let btnExcluir = document.querySelectorAll('.btnExclusao');
+ 
+    let btnExcluir = document.querySelectorAll('.btn-excluir');
 
     for(let i=0; i<btnExcluir.length; i++) {
         btnExcluir[i].onclick = excluir;
@@ -8,17 +8,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function excluir() {
 
-        let idExcluir = this.dataset.id;
+        let idExcluir = this.id;        
+
         if(confirm('Tem certeza que deseja excluir?')) {
 
             if(idExcluir != undefined && idExcluir != '') {
 
-                fetch('/produtos/excluir', {
+                idExcluir = {
+                    id: idExcluir
+                };
+
+                fetch('/adm/produto/excluir', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({id: idExcluir})
+                    body: JSON.stringify(idExcluir)
                 })
                 .then((r) => {
                     return r.json();
@@ -28,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         window.location.reload();
                     }
                     else {
-                        alert(r.msg);
+                        setTimeout(() => {
+                            alert.innerHTML = `<div class="alert alert-danger">${r.msg}</div>`
+                        }, 200);
                     }
                 })
             }

@@ -133,8 +133,8 @@
                                 <td><%= listaProdutos[i].pro_preco %></td>
                                 <td><%= listaProdutos[i].pro_estoque %></td>
                                 <th>
-                                    <a href="/adm/fornecedor/alterar/<%= listaProdutos[i].produtoId %>>" class="btn-alterar"><img  src="/img/btn_editar.png" alt="Botão de editar"></a>
-                                    <a class="btn-excluir"><img id="<%= listaProdutos[i].produtoId %>" src="/img/btn_excluir.png" alt="Botão de exluir"></a>
+                                    <a href="/adm/produto/alterar/<%= listaProdutos[i].pro_cod %>>" class="btn-alterar"><img  src="/img/btn_editar.png" alt="Botão de editar"></a>
+                                    <a class="btn-excluir" id="<%= listaProdutos[i].pro_cod %>"><img id="<%= listaProdutos[i].pro_cod %>" src="/img/btn_excluir.png" alt="Botão de exluir"></a>
                                 </th>
                             </tr>
                         <% } %>
@@ -168,6 +168,7 @@
 <script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/js/adminlte.min.js"></script>
+<script src="/js/produtos/excluirProdutos.js"></script>
 </body>
 </html>
 

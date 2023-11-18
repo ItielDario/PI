@@ -84,7 +84,7 @@ class ProdutosModel {
 
     // Excluir Produto
     async excluirProduto(id) {
-        let sql = 'delete from tb_produtos where produto_id = ?';
+        let sql = 'delete from tb_produto where pro_cod = ?';
         let valores = [id];
 
         let result = await conexao.executaltarComandoCUD(sql, valores);
