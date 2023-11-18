@@ -46,18 +46,13 @@ class ProdutosModel {
 
     // Obter Produto
     async obterProduto(id) {
-        let sql = 'select * from tb_produtos where produto_id=?'
+        let sql = 'select * from tb_produto where pro_cod = ?'
         let valores = [id];
         let rows = await conexao.executaltarComandoR(sql, valores);
-        if(rows.length > 0) {
-            let produto = new ProdutosModel();
-            produto.produtoId = rows[0]['produto_id'];
-            produto.produtoNome = rows[0]['produto_nome'];
-            produto.produtoPreco = rows[0]['produto_preco'];
-            produto.produtoDescricao = rows[0]['produto_descricao'];
-            produto.produtoQtd = rows[0]['produto_qtd'];
-            produto.#fornecedorId = rows[0]['fornecedor_id'];
 
+        if(rows.length > 0) { 
+            let produto = rows;
+            
             return produto;
         }
     }
@@ -68,14 +63,13 @@ class ProdutosModel {
             let sql = 'insert into tb_produto (pro_nome, pro_descricao, pro_estoque, pro_preco) values (?, ?, ?, ?)';
             let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco];
             let result = await conexao.executaltarComandoCUD(sql, valores);
-            console.log(result);
             
             return result;
         }
         // Alterar Produto
         else {
-            let sql = 'update tb_produtos set produto_nome = ?, produto_descricao = ?, produto_qtd = ?, produto_preco = ?, fornecedor_id = ? where produto_id = ?';
-            let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco, this.#fornecedorId, this.#produtoId];
+            let sql = 'update tb_produto set pro_nome = ?, pro_descricao = ?, pro_estoque = ?, pro_preco = ? where pro_cod = ?';
+            let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco, this.#produtoId];
             let result = await conexao.executaltarComandoCUD(sql, valores);
 
             return result;

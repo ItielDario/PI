@@ -42,9 +42,7 @@ class ProdutosController {
         if(req.params.id != undefined) {
             let produto = new ProdutosModel();
             produto = await produto.obterProduto(req.params.id);
-            let fornecedor = new FornecedoresModel();
-            let listaFornecedores = await fornecedor.visualisarFornecedores();
-            res.render('produtos/alterarProdutos', {produto: produto, listaFornecedores: listaFornecedores});
+            res.render('produtos/alterarProdutos', {layout: 'produtos/alterarProdutos', produto: produto});
         }
         else {
             res.redirect('/');
@@ -55,7 +53,7 @@ class ProdutosController {
     async alterar(req, res) {
 
         if(req.body.idProduto > 0 && req.body.nomeProduto != '' && req.body.descricaoProduto != '' && req.body.precoProduto > 0 && req.body.qtdProduto != '') {
-            let produto = new ProdutosModel(req.body.idProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto, req.body.fornecedorId);
+            let produto = new ProdutosModel(req.body.idProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto);
             let retorno = await produto.adicionarProduto();
 
             if(retorno == true) {

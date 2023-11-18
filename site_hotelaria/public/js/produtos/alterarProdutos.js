@@ -1,28 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    document.querySelector('#btnAlterar').addEventListener('click', alterar);
+    const btnAlterar = document.querySelector('.btn-alterar');
+    const alert = document.querySelector('#alert-msg');
+
+    btnAlterar.addEventListener('click', alterar);
 
     function alterar() {
 
-        let idProduto = document.querySelector('#alterarId');
+        let idProduto = btnAlterar.dataset.id;
         let nomeProduto = document.querySelector('#nomeProduto');
         let descricaoProduto = document.querySelector('#descricaoProduto');
         let precoProduto = document.querySelector('#precoProduto');
         let qtdProduto = document.querySelector('#qtdProduto');
-        let fornecedorId = document.querySelector('#produtoFornecedor')
 
         if(validar(idProduto, nomeProduto, descricaoProduto, precoProduto, qtdProduto)) {
 
             let produto = {
-                idProduto: idProduto.value,
+                idProduto: idProduto,
                 nomeProduto: nomeProduto.value,
                 descricaoProduto: descricaoProduto.value,
                 precoProduto: parseFloat(precoProduto.value).toFixed(2),
                 qtdProduto: qtdProduto.value,
-                fornecedorId: fornecedorId.value,
             }
 
-            fetch('/produtos/alterar', {
+            fetch('/adm/produto/alterar', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -34,10 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then((r) => {
                 if(r.ok) {
-                    window.location.reload();
+                    setTimeout(() => {
+                        alert.innerHTML = `<div class="alert alert-primary">${r.msg}</div>`
+                    }, 200);
                 }
                 else {
-                    alert(r.msg)
+                    setTimeout(() => {
+                        alert.innerHTML = `<div class="alert alert-danger">${r.msg}</div>`
+                    }, 200);
                 }
             })
         }
@@ -48,12 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
         descricaoProduto.style["border-color"] = "";
         precoProduto.style["border-color"] = "";
         qtdProduto.style["border-color"] = "";
+        alert.innerHTML = '';
 
         let erros = [];
-        if(idProduto.value != document.querySelector('#alterarId').value){
-            alert('Algo estranho aconteceu com a ID do produto');
-            window.location.href = '/';
-        }
+        if(idProduto.value == "")
+            erros.push(idProduto);
         if(nomeProduto.value == "")
             erros.push(nomeProduto);
         if(descricaoProduto.value == "")
@@ -68,10 +72,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 erros[i].style["border-color"] = "red";
             }
 
+            setTimeout(() => {
+                alert.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+            }, 200);
+
             return false;
         }
         else {
-
             return true;
         }
     }
