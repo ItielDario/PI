@@ -110,54 +110,40 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="card shadow" style="    padding: 20px;min-height: 700px;">
-            <!-- ##### Breadcumb Area Start ##### -->
-            <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center">
-                <div class="bradcumbContent">
-                    <h2>Adicionar Produto</h2>
-                </div>
-            </section>
+        <div class="card shadow" style="padding: 20px;min-height: 700px;">
+          <header>
+                <h1>Adicionar Produto</h1>
             <!-- ##### Breadcumb Area End ##### -->
-            <!-- ##### Listar Produtos Start ##### -->
-            <section class="container mb-5">
-                
+
+            <section class="form">
                 <div class="form-group">
-                    <label for="nomeProduto">Nome do Produto*</label>
-                    <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" placeholder="Digite o nome do produto"/>
+                    <label for="nomeProduto">Nome</label>
+                    <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" placeholder="Nome do produto"/>
                 </div>
+
                 <div class="form-group">
-                    <label for="descricaoProduto">Descrição*</label>
-                    <input type="text" class="form-control" id="descricaoProduto" name="descricaoProduto" placeholder="Digite a descriçao do produto"/>
+                    <label for="descricaoProduto">Descrição</label>
+                    <input type="text" class="form-control" id="descricaoProduto" name="descricaoProduto" placeholder="Descriçao do produto"/>
                 </div>
-                <div class="form-group">
-                    <label for="produtoFornecedor">Fornecedor*</label>
-                    <br>
-                    <select class="form-select nice-select" id="produtoFornecedor">
-                        <option value="0">--Selecione--</option>
-                        <% for(let i=0; i < listaFornecedores.length; i++) { %>
-                            
-                            <option value="<%= listaFornecedores[i].for_cnpj %>"><%= listaFornecedores[i].for_razao_social %></option>
-                        <% } %>    
-                    </select>
-                    <a href="/adm/fornecedor/cadastrar" class="btn btn-primary" title="add new">
-                        <i class="fa fa-plus btn-add-fornecedor"></i>
-                    </a>
-                    Novo Fornecedor
+
+                <div class="row g-3">
+                  <div class="form-group col">
+                      <label for="precoProduto">Preço</label>
+                      <input type="number" class="form-control mask" id="precoProduto" name="precoProduto" placeholder="Preço do Produto"/>
+                  </div>
+
+                  <div class="form-group col">
+                      <label for="qtdProduto">Estoque</label>
+                      <input type="number" class="form-control" id="qtdProduto" name="qtdProduto" placeholder="Quantidade em estoque"/>
+                  </div>
                 </div>
-                <div class="form-group">
-                    <label for="precoProduto">Preço do Produto*</label>
-                    <input type="number" class="form-control mask" id="precoProduto" name="precoProduto"/>
-                </div>
-                <div class="form-group">
-                    <label for="qtdProduto">Quantidade*</label>
-                    <input type="number" class="form-control" id="qtdProduto" name="qtdProduto"/>
-                </div>
-                <div>
-                    <button id="btnGravar" class="btn btn-primary">Adicionar</button>
-                    <a class="btn btn-secondary" href="/produtos">Voltar</a>
-                </div>
-            
+
+                <div class="box-buttons">
+                  <a href="/adm/produto" class="btn btn-secondary" id="btn-voltar">Listar produtos</a>
+                  <button class="btn btn-success" id="btn-cadastrar">Cadastrar</button>
+              </div>
             </section>
+          </header>
             <!-- ##### Listar Produtos End ##### -->
         </div>
     <!-- /.content -->

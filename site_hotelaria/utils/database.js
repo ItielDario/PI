@@ -1,61 +1,56 @@
-var mysql = require('mysql2');
+const mysql = require('mysql2');
 
 class Database {
+    #conexao
 
-    #conexao;
-
-    get conexao() { return this.#conexao;} set conexao(conexao) { this.#conexao = conexao; }
-
-    constructor() {
-
+    constructor(){
         this.#conexao = mysql.createPool({
-            host: '132.226.245.178', //endereço do nosso banco de dados na nuvem
-            port: '3306',
-            database: 'PFS1_10442221580', //a database de cada um de vocês possui a nomenclatura DB_(RA)
-            user: '10442221580', // usuario e senha de cada um de vocês é o RA
-            password: '10442221580',
+            host: '132.226.245.178', 
+            database: 'PFS1_10442221876',
+            user: '10442221876',
+            password: '10442221876',
         });
     }
 
-    ExecutaComando(sql, valores) {
-        var cnn = this.#conexao;
-        return new Promise(function(res, rej) {
-            cnn.query(sql, valores, function (error, results, fields) {
-                if (error) 
+    executaltarComandoLista(sql){
+        return new Promise( (res, rej) => {
+            this.#conexao.query(sql, (error, result) => {
+                if(error){
                     rej(error);
-                else 
-                    res(results);
-            });
-        })
+                }
+                else{
+                    res(result);
+                }
+            })
+        });
     }
-    
-    ExecutaComandoNonQuery(sql, valores) {
-        var cnn = this.#conexao;
-        return new Promise(function(res, rej) {
-            cnn.query(sql, valores, function (error, results, fields) {
-                if (error) 
-                    rej(error);
-                else 
-                    res(results.affectedRows > 0);
-            });
+
+    executaltarComandoCUD(sql, valores){
+        return new Promise((res, rej) => {
+            this.#conexao.query(sql, valores, (error, result) => {
+                if(error){
+                    res(false);
+                    console.log(error)
+                }
+                else{
+;                   res(result.affectedRows > 0);
+                }
+            })
         })
     }
 
-    ExecutaComandoLastInserted(sql, valores) {
-        var cnn = this.#conexao;
-        return new Promise(function(res, rej) {
-            cnn.query(sql, valores, function (error, results, fields) {
-                if (error) 
-                    rej(error);
-                else 
-                    res(results.insertId);
-            });
+    executaltarComandoR(sql, valor){
+        return new Promise((res, rej) => {
+            this.#conexao.query(sql, valor, (error, result) => {
+                if(error){
+                    res(error);
+                }
+                else{
+                    res(result);
+                }
+            })
         })
     }
-
 }
 
 module.exports = Database;
-
-
-

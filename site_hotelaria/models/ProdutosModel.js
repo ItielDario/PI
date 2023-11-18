@@ -34,16 +34,14 @@ class ProdutosModel {
     
     // Visualizar Produtos
     async visualisarProduos() {
-        let listaProdutos = []
-        let sql = 'select * from tb_produtos p inner join tb_fornecedores f on p.fornecedor_id=f.fornecedor_id ORDER BY p.produto_id DESC';
-        let rows = await conexao.ExecutaComando(sql);
+        let lista = []
+        let sql = 'select * from tb_produto';
+        let linhas = await conexao.executaltarComandoLista(sql);
 
-        for(let i=0; i< rows.length; i++) {
-            let produto = new ProdutosModel(rows[i]['produto_id'], rows[i]['produto_nome'], rows[i]['produto_descricao'], rows[i]['produto_preco'], rows[i]['produto_qtd'], rows[i]['fornecedor_nome']);
-            listaProdutos.push(produto);
+        for(let i = 0; i < linhas.length; i++){
+            lista.push(linhas[i]);
         }
-
-        return listaProdutos;
+        return lista;
     }
 
     // Obter Produto

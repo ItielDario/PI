@@ -62,3 +62,7 @@ select{
 .alert-primary{
     background-color: rgb(12, 97, 195);
 }
+
+.form-group{
+    margin-top: 1vw;
+}

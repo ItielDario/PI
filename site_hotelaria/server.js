@@ -12,24 +12,9 @@ const RegistertRoute = require('./routes/registerRoute');
 const HomeAdmRoute = require('./routes/homeAdmRoute');
 var mysql = require('mysql2');
 
-const conexao = mysql.createPool({
-    host: '132.226.245.178', //endereço do nosso banco de dados na nuvem
-    port: '3306',
-    database: 'PFS1_10442221580', //a database de cada um de vocês possui a nomenclatura DB_(RA)
-    user: '10442221580', // usuario e senha de cada um de vocês é o RA
-    password: '10442221580',
-});
-
-conexao.query( 'SELECT * FROM tb_fornecedores', function (error, results, fields) {
-    if (error) 
-        console.log(error);
-    else 
-        console.log(results);
-});
-
 const app = express();
 const host = 'localhost';
-const port = '5012';
+const port = '5000';
 
 app.set('View', './views');
 app.set('layout', './layout');

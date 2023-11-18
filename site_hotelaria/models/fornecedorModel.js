@@ -1,4 +1,4 @@
-const Database = require('../utils/databaseAdm');
+const Database = require('../utils/database');
 
 const conexao = new Database();
 

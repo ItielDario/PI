@@ -1,0 +1,12 @@
+- Mudar cor do ADM
+
+- Colocar logo do hotel no ADM
+
+- Mudar o banco de dados (Fazer a ligação certa, alterar a tabela de produtos com os novos atributos e excluir a tabela categorias)
+
+- Colocar Pop-up quando clicar em excluir
+
+- Botão de Log-out
+
+
+
