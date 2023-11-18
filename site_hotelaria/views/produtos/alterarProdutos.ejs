@@ -1,0 +1,57 @@
+<script src="/js/produtos/alterarProdutos.js"></script>
+<!-- ##### Breadcumb Area Start ##### -->
+<section class="breadcumb-area bg-img d-flex align-items-center justify-content-center">
+    <div class="bradcumbContent">
+        <h2>Alterar Produto</h2>
+    </div>
+</section>
+<!-- ##### Breadcumb Area End ##### -->
+
+<!-- ##### Listar Produtos Start ##### -->
+<section class="container mb-5">
+    <input type="hidden" value="<%= produto.produtoId %>" id="alterarId">
+    <div class="mb-3">
+        <label for="nomeProduto" class="form-label">Nome do Produto</label>
+        <input type="text" class="form-control" id="nomeProduto" name="nomeProduto" value="<%= produto.produtoNome %>">
+    </div>
+    <div class="mb-3">
+        <label for="descricaoProduto" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="descricaoProduto" name="descricaoProduto" value="<%= produto.produtoDescricao %>">
+    </div>
+
+    <div class="form-group">
+        <label for="produtoFornecedor">*</label>
+        <select class="form-select" id="produtoFornecedor">
+            <option value="0">--Fornecedor--</option>
+            <% for(let i=0; i<listaFornecedores.length; i++) {
+                console.log(produto.fornecedorId)
+                if(produto.fornecedorId == listaFornecedores[i].idFornecedor) { %>
+                    
+                    <option selected value="<%= listaFornecedores[i].idFornecedor %>"><%= listaFornecedores[i].nomeFornecedor %></option>
+                <% }
+                else { %>
+                    <option value="<%= listaFornecedores[i].idFornecedor %>"><%= listaFornecedores[i].nomeFornecedor %></option>
+                <% }
+            } %>    
+        </select>
+        <a href="/fornecedores/adicionar" class="btn btn-primary" title="add new">
+            <i class="fa fa-plus"></i>
+        </a>
+        Novo Fornecedor
+    </div>
+
+
+    <div class="mb-3">
+        <label for="precoProduto" class="form-label">Preço do Produto</label>
+        <input type="number" class="form-control mask" id="precoProduto" name="precoProduto" value="<%= produto.produtoPreco %>">
+    </div>
+    <div class="mb-3">
+        <label for="qtdProduto" class="form-label">Quantidade</label>
+        <input type="number" class="form-control" id="qtdProduto" name="qtdProduto" value="<%= produto.produtoQtd %>">
+    </div>
+    <div>
+        <button id="btnAlterar" class="btn btn-primary">Alterar</button>
+        <a class="btn btn-secondary" href="/produtos">Voltar</a>
+    </div>
+</section>
+<!-- ##### Listar Produtos End ##### -->

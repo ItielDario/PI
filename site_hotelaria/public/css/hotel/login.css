@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cb8670;
+    padding: 0 20px;
+}
+
+.container{
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.116);
+}
+
+.container header{
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: 300;
+    text-align: center;
+}   
+
+.icon{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.icon img{
+    width: 45px;
+    opacity: 0.75;
+}
+
+.container .form{
+    margin-top: 1vw;
+}
+
+.form .input-box{
+    width: 100%;
+    margin-top: 1vw;
+}
+
+.input-box label{
+    color: #333;
+}
+
+.form .input-box > input{
+    position: relative;
+    height: 40px;
+    width: 100%;
+    font-size: 0.8rem;
+    color: #707070;
+    margin-top: 4px;
+    outline: none;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    padding: 0 10px;
+}
+
+.form .input-box label{
+    font-size: 0.9rem;
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.263);
+}
+
+.form button{
+    height: 30px;
+    width: 100%;
+    background-color: #cb8670;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.form button:hover{
+    background-color: #af5335;
+}
+
+.create-acont{
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.link-create-acont{
+    color: #cb8670;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+}
+
+.link-create-acont:hover{
+    color: #af5335;
+}
+
+@media screen and (min-width: 1500px){
+    .container{
+        max-width: 35vw;
+        padding: 2vw;
+    }
+    
+    .container header{
+        font-size: 1.2vw;
+    }   
+    
+    .form .input-box > input{
+        height: 3vw;
+        font-size: 1.2vw;
+        margin-top: 0.5vw;
+        padding: 0 1vw;
+    }
+
+    .form .input-box label{
+        font-size: 1.3vw;
+    }
+
+    .form button{
+        height: 2.8vw;
+        font-size: 1.5vw;
+        margin-top: 40px;
+    }
+
+    .create-acont{
+        margin-top: 2vw;
+        font-size: 1.3vw;
+    }
+
+    .icon{
+        margin-top: 1vw;
+    }
+    
+    .icon img{
+        width: 3.8vw;
+    }
+    
+}

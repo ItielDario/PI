@@ -1,0 +1,235 @@
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(img/hotel/bg-img/book.jpg); background-position-y: 75%;">
+        <div class="bradcumbContent">
+            <h2>Reservas</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Rooms Area Start ##### -->
+    <section class="rooms-area section-padding-0-100">
+        <div class="container">
+            <div class="jumbotron-fluid bg-transparent text-center mt-5">
+                <div class="container">
+                  <p class="lead">Caso você deseje realizar um pedido de reserva customizado como, grande quantidade de pessoas, pedidos especiais de acessibilidade ou qualquer outro tipo de reserva fale diretamente com um de nossos atendentes pelo número de telefone (12)12345-6789.</p>
+                  <h1 class="display-4" id="anchor">Realizar Reserva Online</h1>
+                </div>
+            </div>
+   
+            <!-- ##### Meensagem de sucesso ##### -->
+            <div class="container mb-1 mt-5" style="display:flex; width: 100%; justify-content:center;">
+                <div class="col-10 col-lg-10 text-center">
+                    <div class="alert alert-success alert-dismissible fade" role="alert" id="alert">
+                        <strong>Sua reserva foi criada com sucesso</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- ##### Meensagem de sucesso fim ##### -->
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="book-now-form" style="top: 0;">
+                        <form id="book-form" action="/booking#anchor" method="post">
+                            <!-- Form Group -->
+                            <div class="form-group" style="border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                <label for="check-in">Check In</label>
+                                <input type="date"
+                                       class="form-control"
+                                       name="check-in"
+                                       id="check-in"
+                                       title="Data do check-in"
+                                       required="required">
+                                </input>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group" style="border-left:none; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                <label for="check-out">Check Out</label>
+                                <input type="date"
+                                       class="form-control"
+                                       name="check-out"
+                                       id="check-out"
+                                       title="Data do check-out"
+                                       required="required">
+                                </input>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group" style="border-left:none; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                <label for="adults">Adultos</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="adults"
+                                       id="adults"
+                                       title="Quantidade de adultos"
+                                       min="1"
+                                       required="required">
+                                </input>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group" style="border-left:none; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                <label for="children">Crianças</label>
+                                <input type="number"
+                                       class="form-control"
+                                       name="children"
+                                       id="children"
+                                       title="Quantidade de crianças"
+                                       min="0"
+                                       required="required">
+                                </input>
+                            </div>
+
+                            <!-- Form Group Check-in-->
+                            <div class="form-group" title="Tipo de quarto" style="border-left:none; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                <label for="room">Tipo de Quarto</label>
+                                <select class="form-control" name="room" id="room" required="required">
+                                    <option value="0">---</option>
+                                    <option value="1">Família</option>
+                                    <option value="2">Lua de Mel</option>
+                                    <option value="3">Solteiro</option>
+                                </select>
+                            </div>
+
+                            <!-- Form Group Nome Sobrenome -->
+                            <div class="col-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                                <div class="form-group" style="min-width:49.99%; display: block; float: left; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: none; border-bottom: none;">
+                                    <label for="nome">Nome</label>
+                                    <input type="text"
+                                            class="form-control"
+                                            name="nome"
+                                            id="nome"
+                                            placeholder="Seu nome aqui"
+                                            title="Seu nome"
+                                            autocomplete="off"
+                                            required="required">
+                                    </input>
+                                </div>
+                                <div class="form-group" style="min-width:49.99%; display: block; float: right; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                    <label for="sobrenome">Sobrenome</label>
+                                    <input type="text"
+                                            class="form-control"
+                                            name="sobrenome"
+                                            id="sobrenome"
+                                            placeholder="Seu sobrenome aqui"
+                                            title="Seu sobrenome"
+                                            autocomplete="off"
+                                            required="required">
+                                    </input>
+                                </div>
+                            </div>
+
+                            <!-- Form Group CPF Telefone Sexo-->
+                            <div class="col-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                                <div class="form-group" style="min-width:37%; display: block; float: left; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: none; border-bottom: none;">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text"
+                                            class="form-control"
+                                            name="cpf"
+                                            id="cpf"
+                                            pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+                                            title="Seu CPF"
+                                            placeholder="000.000.000-00"
+                                            title="123.456.789-10"
+                                            autocomplete="off"
+                                            required="required">
+                                    </input>
+                                </div>
+                                <div class="form-group" style="min-width:36%; display: block; float: left; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: none; border-bottom: none;">
+                                    <label for="fone">Telefone</label>
+                                    <input type="text"
+                                            class="form-control"
+                                            name="fone"
+                                            id="fone"
+                                            title="Seu telefone"
+                                            placeholder="(18)12345-6789"
+                                            autocomplete="off"
+                                            required="required">
+                                    </input>
+                                </div>
+                                <div class="form-group" title="Sexo" style="min-width:27%; display: block; float: right; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                    <label for="sexo">Sexo</label>
+                                    <div class="form-check form-check-inline ml-1 mr-1">
+                                        <input class="form-check-input" title="Feminino" type="radio" name="sexo" id="f" value="F">
+                                        <label class="form-check-label" for="f">F</label>
+                                    </div>
+                                    <div class="form-check form-check-inline ml-1 mr-1">
+                                        <input class="form-check-input" title="Masculino" type="radio" name="sexo" id="m" value="M">
+                                        <label class="form-check-label" for="m">M</label>
+                                    </div>
+                                    <div class="form-check form-check-inline ml-1 mr-1">
+                                        <input class="form-check-input" title="Outro" type="radio" name="sexo" id="outro" value="outro">
+                                        <label class="form-check-label" for="outro">Outro</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Form Group Estado Cidade -->
+                            <div class="col-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                                <div class="form-group" style="min-width:79.99%; display: block; float: left; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: none; border-bottom: none;">
+                                    <label for="cidade">Cidade</label>
+                                    <input type="text"
+                                            class="form-control"
+                                            name="cidade"
+                                            id="cidade"
+                                            title="Sua cicade"
+                                            placeholder="Sua cidade aqui"
+                                            autocomplete="off"
+                                            required="required">
+                                    </input>
+                                </div>
+                                <div class="form-group" title="Seu estado" style="min-width:19.99%; display: block; float: right; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                    <label for="estado">Estado</label>
+                                        <select class="form-control" name="estado" id="estado" required="required">
+                                            <option value="0">---</option>
+                                            <option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option>
+                                            <option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option>
+                                            <option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option>
+                                            <option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option>
+                                            <option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option>
+                                            <option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option>
+                                            <option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option>
+                                            <option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option>
+                                            <option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option>
+                                        </select>
+                                </div>
+                            </div>
+
+                            <!-- Form Group Endereço -->
+                            <div class="col-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                                <div class="form-group" style="min-width:99.99%; display: block; float: left; height: 80px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: 0.2px solid #cb8670; border-bottom: none;">
+                                    <label for="endereco">Endereço:</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="endereco"
+                                           id="endereco"
+                                           title="Seu endereço"
+                                           placeholder="Seu endereço aqui"
+                                           autocomplete="off"
+                                           required="required">
+                                    </input>
+                                </div>
+                            </div>
+                            <!-- Form Group Range  e Botão -->
+                            <div class="col-12 col-lg-12" style="padding-left: 0; padding-right: 0;">
+                                <div class="form-group" style="min-width:69.99%; float: left; height: 120px; border-left:0.2px solid #cb8670; border-top: 0.2px solid #cb8670; border-right: none; border-bottom: 0.2px solid #cb8670;">
+                                    <label for="range">Probabilidade de prolongar a estadia</label>
+                                    <input type="range" title="Possibilidade de prolongar estadia" class="form-control-range" min="0" max="10" id="range">
+                                    <div style="display:flex; width: 100%; justify-content:space-between;">
+                                        <label style="align-self: flex-start; flex-grow:1;" >0%</label>
+                                        <label style="align-self: flex-end; flex-grow:1; text-align: right;">100%</label>
+                                    </div>
+                                </div>
+                                <!-- Button -->
+                                <button type="submit" title="Realizar reserva" style="min-width:29.99%; height: 120px;" id="reservar">Reservar Agora</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Rooms Area End ##### -->

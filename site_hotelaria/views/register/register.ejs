@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/css/hotel/cadastro.css">
+</head>
+<body>
+    <section class="container">
+        <header>
+            <h1>Cadastro</h1>
+        </header>
+        <form action="#" class="form">
+            <div class="input-box">
+                <label for="nome-cad">Nome completo</label>
+                <input type="text" placeholder="Digite seu nome" id="nome-cad" name="nome-cad" required>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="email-cad">E-mail</label>
+                    <input type="email" placeholder="Digite um e-mail" id="email-cad" name="email-cad" required>
+                </div>
+                <div class="input-box">
+                    <label for="senha-cad">Senha</label>
+                    <input type="password" placeholder="Digite uma senha" id="senha-cad" name="senha-cad" required>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-box">
+                    <label for="tel-cad">Número do celular</label>
+                    <input type="tel" placeholder="(99) 9999-9999" id="tel-cad" name="tel-cad" required>
+                </div>
+
+                <div class="input-box">
+                    <label for="data-nasc-cad">Data de nascimento</label>
+                    <input type="date" id="data-nasc-cad" name="data-nasc-cad" required>
+                </div>
+
+            </div>
+
+            <div class="gender-box">
+                <label for="">Gênero</label>
+                <div class="gender-option">
+                    <div class="gender">
+                        <input type="radio" id="check-male" name="gender" checked>
+                        <label for="check-male">Masculino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-female" name="gender">
+                        <label for="check-female">Feminino</label>
+                    </div>
+                    <div class="gender">
+                        <input type="radio" id="check-other" name="gender">
+                        <label for="check-other">Outro</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="know-box">
+                <label for="">Como nos conheceu?</label>
+                <div class="know-option">
+                    <div class="know">
+                        <input type="checkbox" id="check1" name="check1">
+                        <label for="check1">Indicação</label>
+                    </div>
+                    <div class="know">
+                        <input type="checkbox" id="check2" name="check2">
+                        <label for="check2">Amigos</label>
+                    </div>
+                    <div class="know">
+                        <input type="checkbox" id="check3" name="check3">
+                        <label for="check3">Anúncios</label>
+                    </div>
+                    <div class="know know-other">
+                        <label for="other-know">Outro</label>
+                        <textarea name="other-know" id="other-know" cols="20" rows="1"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="lang-box">
+                    <label for="lang">Idioma</label>
+                    <select name="lang" id="lang">
+                        <option value="en">Inglês</option>
+                        <option value="pt" selected>Português</option>
+                        <option value="es">Espanhol</option>
+                    </select>
+                </div>
+
+                <div class="work-box">
+                    <label for="prof">Profissão</label>
+                    <input type="text" name="prof" id="prof" list="listprof">
+                    <datalist id="listprof">
+                        <option>Desenvolvedor</option>
+                        <option>Advogado</option>
+                        <option>Engenheiro</option>
+                        <option>Arquiteto</option>
+                        <option>Design</option>
+                    </datalist>
+                </div>
+            </div>
+
+            <button>Enviar</button>
+        </form>
+    </section>
+</body>
+</html>

@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cb8670;
+    padding: 0 20px;
+}
+
+.container{
+    position: relative;
+    max-width: 800px;
+    width: 100%;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.116);
+}
+
+.container header{
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: 300;
+    text-align: center;
+}   
+
+.container .form{
+    margin-top: 1vw;
+}
+
+.form .input-box{
+    width: 100%;
+    margin-top: 1vw;
+}
+
+.input-box label{
+    color: #333;
+}
+
+.form .input-box > input{
+    position: relative;
+    height: 40px;
+    width: 100%;
+    font-size: 0.8rem;
+    color: #707070;
+    margin-top: 4px;
+    outline: none;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    padding: 0 10px;
+}
+
+.form .input-box label{
+    font-size: 0.9rem;
+}
+
+.form .column{
+    display: flex;
+    column-gap: 15px;
+    justify-content: space-between;
+}
+
+input::placeholder{
+    color: rgba(0, 0, 0, 0.263);
+}
+
+.form .gender-box, .know-box, .lang-box, .work-box{
+    margin-top: 15px;
+}
+
+.gender-box > label, .know-box > label, .lang-box > label, .work-box > label{
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.gender, .know{
+    accent-color: #cb8670;
+}
+
+.form .gender-option, .know-option{
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+}
+
+.form .gender input,label{
+    column-gap: 5px;
+    cursor: pointer;
+}
+
+.form .know input,label{
+    column-gap: 5px;
+    cursor: pointer;
+    color: #707070;
+}
+
+textarea{
+    color: #707070;
+    outline: none;
+    border: 1px solid #DDD;
+    padding: 3px 8px;
+}
+
+.know-other{
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.lang-box, .work-box{
+    width: 47%;
+}
+
+.lang-box select, .work-box input{
+    height: 60%;
+    width: 100%;
+    outline: none;
+    border: 1px solid #70707060;
+    color: #333;
+    font-size: 0.8rem;
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+.form button{
+    height: 30px;
+    width: 100%;
+    background-color: #cb8670;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    border-radius: 6px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.form button:hover{
+    background-color: #af5335;
+}
+
+/* RESPONSIVIDADE */
+
+@media screen and (max-width: 500px){
+    .form .column{
+        flex-wrap: wrap;
+    }
+
+    .form .gender-option, .know-option{
+        row-gap: 10px;
+    }
+}
+
+@media screen and (min-width: 1500px){
+    .container{
+        max-width: 1200px;
+        padding: 2vw;
+    }
+    
+    .container header{
+        font-size: 1.2vw;
+    }   
+    
+    .form .input-box > input{
+        height: 3vw;
+        font-size: 1.2vw;
+        margin-top: 0.5vw;
+        padding: 0 1vw;
+    }
+    
+    .form .column{
+        column-gap: 2vw;
+    }
+    
+    .form .gender-box, .know-box, .lang-box, .work-box{
+        margin-top: 1.5vw;
+    }
+    
+    .gender-box > label, .know-box > label, .lang-box > label, .work-box > label{
+        font-size: 1.3vw;
+        margin-bottom: 0.5vw;
+    }
+    
+    .form .gender-option, .know-option{
+        column-gap: 2vw;
+        font-size: 1.1vw;
+    }
+    
+    textarea{
+        color: #707070;
+        outline: none;
+        border: 1px solid #DDD;
+        padding: 0.5vw 0.8vw;
+        font-size: 1.2vw;
+    }
+    
+    .lang-box select, .work-box input{
+        font-size: 1.2vw;
+    }
+
+    .form .input-box label{
+        font-size: 1.3vw;
+    }
+
+    .form button{
+        height: 50px;
+        font-size: 2rem;
+        margin-top: 40px;
+    }
+}
