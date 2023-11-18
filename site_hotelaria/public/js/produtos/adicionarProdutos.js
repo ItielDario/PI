@@ -1,30 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    document.querySelector('#btnGravar').addEventListener('click', adicionar);
+    document.querySelector('#btn-cadastrar').addEventListener('click', adicionar);
 
     function adicionar() {
-
         let nomeProduto = document.querySelector('#nomeProduto');
         let descricaoProduto = document.querySelector('#descricaoProduto');
         let precoProduto = document.querySelector('#precoProduto');
         let qtdProduto = document.querySelector('#qtdProduto');
-        let fornecedorProduto = document.querySelector('#produtoFornecedor');
+        const alert = document.querySelector('#alert-msg');
 
-        if(validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto, fornecedorProduto)) {
+        if(validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto)) {
 
             let produto = {
                 nomeProduto: nomeProduto.value,
                 descricaoProduto: descricaoProduto.value,
                 precoProduto: parseFloat(precoProduto.value).toFixed(2),
                 qtdProduto: qtdProduto.value,
-                fornecedorProduto: fornecedorProduto.value
             }
 
             fetch('/adm/produto/adicionar', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
-                },
+                    "Content-Type": "application/json"
+                }, 
                 body: JSON.stringify(produto)
             })
             .then((r) => {
@@ -32,21 +30,31 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then((r) => {
                 if(r.ok) {
-                    window.location.reload();
+                    setTimeout(() => {
+                        alert.innerHTML = `<div class="alert alert-primary">${r.msg}</div>`
+                    }, 200);
+                    
+                    nomeProduto.value = ''
+                    descricaoProduto.value = ''
+                    precoProduto.value = ''
+                    qtdProduto.value = ''
+                    
                 }
                 else {
-                    alert(r.msg)
+                    setTimeout(() => {
+                        alert.innerHTML = `<div class="alert alert-danger">${r.msg}</div>`
+                    }, 200);
                 }
             })
         }
     }
-    function validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto, fornecedorProduto) {
+    function validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto) {
 
+        alert.innerHTML = '';
         nomeProduto.style["border-color"] = "";
         descricaoProduto.style["border-color"] = "";
         precoProduto.style["border-color"] = "";
         qtdProduto.style["border-color"] = "";
-        document.querySelector('.nice-select').style["border-color"] = "none";
 
         let erros = [];
         if(nomeProduto.value == "")
@@ -57,18 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
             erros.push(precoProduto);
         if(qtdProduto.value < 0 || qtdProduto.value == "")
             erros.push(qtdProduto);
-        if(fornecedorProduto.value == 0)
-            document.querySelector('.nice-select').style["border-color"] = "red";
 
         if(erros.length > 0) {
             for(let i = 0; i<erros.length; i++){
                 erros[i].style["border-color"] = "red";
             }
-
+            setTimeout(() => {
+                alert.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+            }, 200);
             return false;
         }
         else {
-
             return true;
         }
     }

@@ -20,12 +20,13 @@ class ProdutosController {
 
     // POST - Adicionar produtos
     async adicionar(req, res) {
-        if(req.body.nomeProduto != '' && req.body.descricaoProduto != '' && req.body.precoProduto != '' && req.body.qtdProduto != '', req.body.fornecedorProduto != '') {
+
+        if(req.body.nomeProduto != '' && req.body.descricaoProduto != '' && req.body.precoProduto != '' && req.body.qtdProduto != '') {
             
-            let produto = new ProdutosModel(0, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto, req.body.fornecedorProduto);
+            let produto = new ProdutosModel(0, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto);
             let retorno = await produto.adicionarProduto();
             if(retorno == true) {
-                res.send({ok: true, msg: 'Produto adicionado'});
+                res.send({ok: true, msg: 'Produto adicionado com sucesso'});
             }
             else {
                 res.send({ok: false, msg: 'Erro ao adicionar produto'});

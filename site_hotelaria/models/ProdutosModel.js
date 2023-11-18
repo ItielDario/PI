@@ -48,7 +48,7 @@ class ProdutosModel {
     async obterProduto(id) {
         let sql = 'select * from tb_produtos where produto_id=?'
         let valores = [id];
-        let rows = await conexao.ExecutaComando(sql, valores);
+        let rows = await conexao.executaltarComandoR(sql, valores);
         if(rows.length > 0) {
             let produto = new ProdutosModel();
             produto.produtoId = rows[0]['produto_id'];
@@ -65,9 +65,10 @@ class ProdutosModel {
     // Adicionar Produto
     async adicionarProduto() {
         if(this.#produtoId == 0) {
-            let sql = 'insert into tb_produtos (produto_nome, produto_descricao, produto_qtd, produto_preco, fornecedor_id) values (?, ?, ?, ?, ?)';
-            let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco, this.#fornecedorId];
-            let result = await conexao.ExecutaComandoNonQuery(sql, valores);
+            let sql = 'insert into tb_produto (pro_nome, pro_descricao, pro_estoque, pro_preco) values (?, ?, ?, ?)';
+            let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco];
+            let result = await conexao.executaltarComandoCUD(sql, valores);
+            console.log(result);
             
             return result;
         }
@@ -75,7 +76,7 @@ class ProdutosModel {
         else {
             let sql = 'update tb_produtos set produto_nome = ?, produto_descricao = ?, produto_qtd = ?, produto_preco = ?, fornecedor_id = ? where produto_id = ?';
             let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco, this.#fornecedorId, this.#produtoId];
-            let result = await conexao.ExecutaComandoNonQuery(sql, valores);
+            let result = await conexao.executaltarComandoCUD(sql, valores);
 
             return result;
         }
@@ -86,7 +87,7 @@ class ProdutosModel {
         let sql = 'delete from tb_produtos where produto_id = ?';
         let valores = [id];
 
-        let result = await conexao.ExecutaComandoNonQuery(sql, valores);
+        let result = await conexao.executaltarComandoCUD(sql, valores);
 
         return result;
     }
