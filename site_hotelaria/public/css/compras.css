@@ -1,0 +1,111 @@
+header{ 
+    padding: 2vw;
+}
+
+h1{ 
+    font-size: 3vw;
+}
+
+.form{
+    margin-top: 2vw;
+}
+
+label{
+    font-size: 2vw;
+}
+
+.form-control{  
+    padding: 1.4vw 1vw;
+    font-size: 1.8vw;
+    border-color: rgb(159, 159, 159);
+}
+
+.cnpj-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cnpj-input{
+    width: 30%;
+}
+
+.nome-input{
+    width: 70%;
+}
+
+#btn-cnpj{
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+
+.form-control::placeholder{
+    color: rgb(146, 146, 146);
+}
+
+.col-12{
+    margin-top: 1.5vw;
+    padding: 0;
+}
+
+.box-buttons{
+    display: flex;
+    justify-content: end;
+    margin-top: 3vw;
+}
+
+#nome{
+    cursor: not-allowed;
+}
+
+.btn-excluir, #btn-adicionar, #btn-gravar{
+    font-size: 1.5vw;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-excluir > img, .btn-alterar > img {
+    width: 1.8vw;
+    margin-left: 0.5vw;
+}
+
+.alert{
+    color: white;
+    font-weight: bold;
+    padding: 1vw 2vw;
+    font-size: 2vw;
+    border: none;
+}
+
+.alert-danger{
+    background-color: rgb(195, 12, 12);
+}
+
+.alert-primary{
+    background-color: rgb(12, 97, 195);
+}
+
+.form-group{
+    margin-top: 1vw;
+}
+
+td{
+    font-weight: bold;
+}
+
+table{
+    margin-top: 5vw;
+    font-size: 1.3vw;
+}
+
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.valor-total-produto{
+    margin-right: 5vw;
+}
