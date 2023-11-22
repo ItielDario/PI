@@ -1,10 +1,13 @@
 const btnAdicionar = document.querySelector('#btn-adicionar');
 const btnBuscar = document.querySelector('#btn-cnpj');
+const btnGravar = document.querySelector('#btn-gravar');
 const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let idProduto = 0;
 
+
+// DADOS DA NOTA
 cnpj.addEventListener('input', function (e) {
     var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
     e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
@@ -12,6 +15,7 @@ cnpj.addEventListener('input', function (e) {
 
 btnBuscar.addEventListener('click', () => { 
     const alertDados = document.querySelector('#alert-msg-dados');
+    alertDados.innerHTML = ''
 
     if(cnpj.value.length != 18){
         setTimeout(() => {
@@ -49,6 +53,8 @@ btnBuscar.addEventListener('click', () => {
     }
 });
 
+
+// LISTA DE PRODUTOS
 btnAdicionar.addEventListener('click', adicionarProduto);
 
 function adicionarProduto(){
@@ -159,3 +165,61 @@ function excluir(evt){
     exibirTabela(listaProdutos);
 }
 
+
+
+// GRAVAR TODOS OS DADOS
+btnGravar.addEventListener('click', () => {
+    const alertDados = document.querySelector('#alert-msg-dados');
+    const nome = document.querySelector('#nome');
+    const numNota = document.querySelector('#num-nota');
+    const dataNota = document.querySelector('#data-nota');
+    const valorNota = document.querySelector('#valor-nota');
+    alertDados.innerHTML = ''
+
+    console.log(dataNota.value)
+
+
+    if(cnpj.value.length != 18 || nome.value == '' || numNota.value < 0 || numNota.value == '' || dataNota.value == '' || valorNota.value < 0 || valorNota.value == ''){
+        setTimeout(() => {
+            alertDados.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+        }, 200);
+    }
+    else{ 
+          
+        const dadosNota = {
+            cnpj: cnpj.value,
+            nome: nome.value,
+            numNota: numNota.value,
+            dataNota: dataNota.value,
+            valorNota: valorNota.value,
+        }
+
+        const dadosCompra = [dadosNota, listaProdutos]
+
+        console.log('aaa' + dadosNota)
+        console.log('bbb' + lista)
+
+        fetch('/adm/compras/cadastrar', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify(dadosCompra)
+        })
+        .then(function(resposta1) {
+            return resposta1.json()
+        })
+        .then(function(resposta2) {
+            if(resposta2.ok){
+                document.querySelector('#nome').value = resposta2.msg;
+                
+            }
+            else{
+                setTimeout(() => {
+                    alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
+                }, 200);
+            }
+            
+        });
+    }
+})

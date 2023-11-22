@@ -22,9 +22,11 @@ class ComprasController{
         else{
             res.send({ok: false, msg: "Por favor, preencha os campos corretamente!"});
         }
-
-        
     }    
+
+    async cadastrarCompra(req, res){
+        console.log(req.body)
+    }
 }
 
 module.exports = ComprasController;
