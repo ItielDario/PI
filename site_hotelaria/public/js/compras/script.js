@@ -5,7 +5,7 @@ const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let idProduto = 0;
-let valorComDesconto;
+let valorComDesconto = 0;
 
 
 // DADOS DA NOTA
@@ -151,14 +151,8 @@ function excluir(evt){
 
     let vetAux = [];
     for(let i = 0; i < listaProdutos.length; i++){
-        console.log(listaProdutos[i].id)
-        console.log(idProdutoEvt)
         if(listaProdutos[i].id != idProdutoEvt){
-            console.log('salva');
             vetAux.push(listaProdutos[i]);
-        }
-        else{
-            console.log('NAO salva');
         }
     }
 
@@ -170,15 +164,18 @@ function excluir(evt){
 // GRAVAR TODOS OS DADOS
 btnGravar.addEventListener('click', () => {
     const alertDados = document.querySelector('#alert-msg-dados');
+    const alertValor = document.querySelector('#alert-msg-valor');
     const nome = document.querySelector('#nome');
     const numNota = document.querySelector('#num-nota');
     const dataNota = document.querySelector('#data-nota');
     const valorNota = document.querySelector('#valor-nota');
     const desconto = document.querySelector('#desconto');
     alertDados.innerHTML = ''
+    alertValor.innerHTML = ''
 
-    console.log(dataNota.value)
-
+    if(valorComDesconto == 0){
+        valorComDesconto = valorTotalCompra;
+    }
 
     if(cnpj.value.length != 18 || nome.value == '' || numNota.value < 0 || numNota.value == '' || dataNota.value == '' || valorNota.value < 0 || valorNota.value == ''){
         setTimeout(() => {
@@ -186,9 +183,11 @@ btnGravar.addEventListener('click', () => {
         }, 200);
     }
     else{ 
-        if(valorComDesconto != valorNota){
+        console.log(valorComDesconto)
+        console.log(valorNota.value)
+        if(valorComDesconto != valorNota.value){
             setTimeout(() => {
-                alertDados.innerHTML = `<div class="alert alert-danger">O valor da nota é dierente do valor total</div>`
+                alertValor.innerHTML = `<div class="alert alert-danger">O valor da nota é diferente do valor total</div>`
             }, 200);
         }
         else{
