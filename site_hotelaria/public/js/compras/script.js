@@ -4,7 +4,6 @@ const btnGravar = document.querySelector('#btn-gravar');
 const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
-let idProduto = 0;
 let valorComDesconto = 0;
 
 
@@ -64,51 +63,69 @@ function adicionarProduto(){
     const produto = document.querySelector('#produto');
     const quantidade = document.querySelector('#quantidade');
     const valorUni = document.querySelector('#valor-uni');
-    
     const valorTotalProduto = document.querySelector('.valor-total-produtos');
     alertProdutos.innerHTML = '';
 
     if(validarCampos(produto.value, quantidade.value, valorUni.value)){
 
-        setTimeout(() => {
-            alertProdutos.innerHTML = `<div class="alert alert-primary">TAÍ MEU CUMPADE</div>`
-        }, 200);
-        setTimeout(() => {
-            alertProdutos.innerHTML = ''
-        }, 3000);
-
-        let totalProduto = Number((valorUni.value * quantidade.value));
-        valorTotalCompra = (valorTotalCompra + totalProduto);
-
-        listaProdutos.push({
-            id: `${idProduto}`,
-            produto: `${produto.value}`,
-            quantidade: `${quantidade.value}`,
-            valorUnitario: (valorUni.value * 1).toFixed(2),
-            valorTotalProduto: totalProduto.toFixed(2)
-        });
-
-        
-        exibirTabela(listaProdutos);
-
-        valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorTotalCompra.toFixed(2)} </h3>`;
-        produto.value = '';
-        produto.focus();
-        quantidade.value = '';
-        valorUni.value = '';
-
-        desconto.addEventListener('keyup', () => {
-            valorComDesconto = valorTotalCompra - desconto.value;
-
-            valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorComDesconto.toFixed(2)} </h3>`;
-        })
-
-        const btn = document.querySelectorAll(`.btn-excluir`);
-        for(let i = 0; i < btn.length; i++){
-            btn[i].addEventListener('click', excluir);
+        const id = {
+            id: produto.value,
         }
 
-        idProduto++;
+        fetch('/adm/compras/buscar/produto', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify(id)
+        })
+        .then(function(resposta1) {
+            return resposta1.json()
+        })
+        .then(function(resposta2) {
+            if(resposta2.ok){
+                setTimeout(() => {
+                    alertProdutos.innerHTML = `<div class="alert alert-primary">TAÍ MEU CUMPADE</div>`
+                }, 200);
+                setTimeout(() => {
+                    alertProdutos.innerHTML = ''
+                }, 3000);
+
+                let totalProduto = Number((valorUni.value * quantidade.value));
+        
+                listaProdutos.push({
+                    id: `${produto.value}`,
+                    produto: `${resposta2.msg}`,
+                    quantidade: `${quantidade.value}`,
+                    valorUnitario: (valorUni.value * 1).toFixed(2),
+                    valorTotalProduto: totalProduto.toFixed(2)
+                });
+        
+                exibirTabela(listaProdutos);
+
+                produto.value = '';
+                produto.focus();
+                quantidade.value = '';
+                valorUni.value = '';
+        
+                desconto.addEventListener('keyup', () => {
+                    valorComDesconto = valorTotalCompra - desconto.value;
+        
+                    valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorComDesconto.toFixed(2)} </h3>`;
+                })
+        
+                const btn = document.querySelectorAll(`.btn-excluir`);
+                for(let i = 0; i < btn.length; i++){
+                    btn[i].addEventListener('click', excluir);
+                }
+            }
+            else{
+                setTimeout(() => {
+                    alertProdutos.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
+                }, 200);
+            }
+            
+        });
     }
     else{
         setTimeout(() => {
@@ -128,9 +145,13 @@ function validarCampos(produto, quantidade, valorUni){
 
 function exibirTabela(listaProdutos){
     const tabelaProdutos = document.querySelector('#lista-produtos');
+    const valorTotalProduto = document.querySelector('.valor-total-produtos');
     tabelaProdutos.innerHTML = '';
-    
+    valorTotalCompra = 0;
+
     for(let i = 0; i < listaProdutos.length; i++){
+        valorTotalCompra = (valorTotalCompra + Number(listaProdutos[i].valorTotalProduto));
+
         tabelaProdutos.innerHTML += 
         `
             <tr>
@@ -143,6 +164,8 @@ function exibirTabela(listaProdutos){
             </tr>
         `
     }
+
+    valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorTotalCompra.toFixed(2)} </h3>`;
 }
 
 function excluir(evt){
@@ -183,8 +206,6 @@ btnGravar.addEventListener('click', () => {
         }, 200);
     }
     else{ 
-        console.log(valorComDesconto)
-        console.log(valorNota.value)
         if(valorComDesconto != valorNota.value){
             setTimeout(() => {
                 alertValor.innerHTML = `<div class="alert alert-danger">O valor da nota é diferente do valor total</div>`

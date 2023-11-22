@@ -1,4 +1,5 @@
 const FornecedorModel = require('../models/fornecedorModel');
+const ProdutosModel = require('../models/ProdutosModel');
 
 
 class ComprasController{
@@ -22,7 +23,26 @@ class ComprasController{
         else{
             res.send({ok: false, msg: "Por favor, preencha os campos corretamente!"});
         }
-    }    
+    }   
+    
+    async buscarProduto(req, res) {
+        
+        if(req.body.id != undefined) {
+            let produto = new ProdutosModel();
+            produto = await produto.obterProduto(req.body.id);
+            if(produto != undefined){
+                res.send({ok: true, msg: produto[0].pro_nome});
+            }
+            else{
+                console.log('false');
+                res.send({ok: false, msg: "Produto não cadastrado!"});
+            }
+            
+        }
+        else {
+            res.send({ok: false, msg: "Por favor, preencha os campos corretamente!"});
+        }
+    }
 
     async cadastrarCompra(req, res){
         console.log(req.body)

@@ -41,8 +41,9 @@ class HomeAdmRoute {
 
         // COMPRAS
         this.#router.get("/compras", ctrlCompras.comprasView);
-        this.#router.post("/compras/buscar", ctrlCompras.buscarCNPJ);
         this.#router.post("/compras/cadastrar", ctrlCompras.cadastrarCompra);
+        this.#router.post("/compras/buscar", ctrlCompras.buscarCNPJ);
+        this.#router.post("/compras/buscar/produto", ctrlCompras.buscarProduto);
         
     }
 }
