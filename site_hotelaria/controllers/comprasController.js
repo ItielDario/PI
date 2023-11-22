@@ -3,12 +3,28 @@ const FornecedorModel = require('../models/fornecedorModel');
 
 class ComprasController{
 
-    async comprasView(req, res){
+    comprasView(req, res){
         res.render('compras/index', {layout: 'compras/index'});
     }
 
-    
-    
+    async buscarCNPJ(req, res){
+        
+        if(req.body.cnpj != ''){
+            const fornecedor = new FornecedorModel();
+            const resposta = await fornecedor.buscarFornecedor(req.body.cnpj)
+            if(resposta.length > 0){
+                res.send({ok: true, msg: resposta[0].for_razao_social});
+            }
+            else{
+                res.send({ok: false, msg: "Fornecedor não cadastrado!"});
+            }
+        }
+        else{
+            res.send({ok: false, msg: "Por favor, preencha os campos corretamente!"});
+        }
+
+        
+    }    
 }
 
 module.exports = ComprasController;

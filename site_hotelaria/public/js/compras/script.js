@@ -1,15 +1,53 @@
 const btnAdicionar = document.querySelector('#btn-adicionar');
-const btnGravar = document.querySelector('#btn-gravar');
-
-btnGravar.addEventListener('click', gravarProdutos);
-
-function gravarProdutos(){
-    console.log('aaaaaaaaaa')
-}
-
+const btnBuscar = document.querySelector('#btn-cnpj');
+const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let idProduto = 0;
+
+cnpj.addEventListener('input', function (e) {
+    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+    e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+});
+
+btnBuscar.addEventListener('click', () => { 
+    const alertDados = document.querySelector('#alert-msg-dados');
+
+    if(cnpj.value.length != 18){
+        setTimeout(() => {
+            alertDados.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+        }, 200);
+    }
+    else{ 
+          
+        const json = JSON.stringify({
+            cnpj: cnpj.value,
+        })
+
+        fetch('/adm/compras/buscar', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: json,
+        })
+        .then(function(resposta1) {
+            return resposta1.json()
+        })
+        .then(function(resposta2) {
+            if(resposta2.ok){
+                document.querySelector('#nome').value = resposta2.msg;
+                
+            }
+            else{
+                setTimeout(() => {
+                    alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
+                }, 200);
+            }
+            
+        });
+    }
+});
 
 btnAdicionar.addEventListener('click', adicionarProduto);
 

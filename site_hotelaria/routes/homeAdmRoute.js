@@ -41,6 +41,7 @@ class HomeAdmRoute {
 
         // COMPRAS
         this.#router.get("/compras", ctrlCompras.comprasView);
+        this.#router.post("/compras/buscar", ctrlCompras.buscarCNPJ);
         
     }
 }
