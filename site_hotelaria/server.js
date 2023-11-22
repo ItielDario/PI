@@ -7,9 +7,11 @@ const BlogRoute = require('./routes/blogRoute');
 const BookingRoute = require('./routes/bookingRoute');
 const ServicesRoute = require('./routes/servicesRoute');
 const ContactRoute = require('./routes/contactRoute');
+const Autenticacao = require('./middlewares/autenticacao');
 const LoginRoute = require('./routes/loginRoute');
 const RegistertRoute = require('./routes/registerRoute');
 const HomeAdmRoute = require('./routes/homeAdmRoute');
+const cookieParser = require('cookie-parser');
 var mysql = require('mysql2');
 
 const app = express();
@@ -23,7 +25,10 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(cookieParser());
 app.use(EjsLayout)
+
+let auth = new Autenticacao();
 
 let homeRota = new HomeRoute();
 app.use('/', homeRota.router);
@@ -51,6 +56,10 @@ app.use('/login', loginRota.router);
 
 let registerRota = new RegistertRoute();
 app.use('/register', registerRota.router);
+
+//acesso deslogado acima
+app.use(auth.verificaUsuarioLogado);
+//acesso logado abaixo
 
 let homeAdmRota = new HomeAdmRoute();
 app.use('/adm', homeAdmRota.router);
