@@ -5,6 +5,7 @@ const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let idProduto = 0;
+let valorComDesconto;
 
 
 // DADOS DA NOTA
@@ -97,7 +98,7 @@ function adicionarProduto(){
         valorUni.value = '';
 
         desconto.addEventListener('keyup', () => {
-            let valorComDesconto = valorTotalCompra - desconto.value;
+            valorComDesconto = valorTotalCompra - desconto.value;
 
             valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorComDesconto.toFixed(2)} </h3>`;
         })
@@ -166,7 +167,6 @@ function excluir(evt){
 }
 
 
-
 // GRAVAR TODOS OS DADOS
 btnGravar.addEventListener('click', () => {
     const alertDados = document.querySelector('#alert-msg-dados');
@@ -174,6 +174,7 @@ btnGravar.addEventListener('click', () => {
     const numNota = document.querySelector('#num-nota');
     const dataNota = document.querySelector('#data-nota');
     const valorNota = document.querySelector('#valor-nota');
+    const desconto = document.querySelector('#desconto');
     alertDados.innerHTML = ''
 
     console.log(dataNota.value)
@@ -185,41 +186,45 @@ btnGravar.addEventListener('click', () => {
         }, 200);
     }
     else{ 
-          
-        const dadosNota = {
-            cnpj: cnpj.value,
-            nome: nome.value,
-            numNota: numNota.value,
-            dataNota: dataNota.value,
-            valorNota: valorNota.value,
+        if(valorComDesconto != valorNota){
+            setTimeout(() => {
+                alertDados.innerHTML = `<div class="alert alert-danger">O valor da nota é dierente do valor total</div>`
+            }, 200);
         }
-
-        const dadosCompra = [dadosNota, listaProdutos]
-
-        console.log('aaa' + dadosNota)
-        console.log('bbb' + lista)
-
-        fetch('/adm/compras/cadastrar', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            }, 
-            body: JSON.stringify(dadosCompra)
-        })
-        .then(function(resposta1) {
-            return resposta1.json()
-        })
-        .then(function(resposta2) {
-            if(resposta2.ok){
-                document.querySelector('#nome').value = resposta2.msg;
+        else{
+            const dadosNota = {
+                cnpj: cnpj.value,
+                nome: nome.value,
+                numNota: numNota.value,
+                dataNota: dataNota.value,
+                valorNota: valorNota.value,
+                desconto: desconto.value,
+            }
+    
+            const dadosCompra = [dadosNota, listaProdutos]
+    
+            fetch('/adm/compras/cadastrar', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify(dadosCompra)
+            })
+            .then(function(resposta1) {
+                return resposta1.json()
+            })
+            .then(function(resposta2) {
+                if(resposta2.ok){
+                    document.querySelector('#nome').value = resposta2.msg;
+                    
+                }
+                else{
+                    setTimeout(() => {
+                        alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
+                    }, 200);
+                }
                 
-            }
-            else{
-                setTimeout(() => {
-                    alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
-                }, 200);
-            }
-            
-        });
+            });
+        }
     }
 })
