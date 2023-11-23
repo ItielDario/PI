@@ -10,3 +10,13 @@
 
 
 
+ARRUMAR BUGS NO SITE:
+
+- Não da para excluir mais de uma produto de uma vez. Só para para excluir um produto depois que cadastra um novo.
+
+- Não valida se o mesmo produto foi inserido na lista. é possivel colocar o mesmo produto varias vezes na lista
+
+- Se um produto for cadastrado mais de uma vez na lista e se apertamos em excluir um desses produtos o site exclui todos os protudos iguais ao excluido
+
+
+

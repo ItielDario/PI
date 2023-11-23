@@ -1,5 +1,7 @@
 const FornecedorModel = require('../models/fornecedorModel');
 const ProdutosModel = require('../models/ProdutosModel');
+const CompraModel = require('../models/CompraModel');
+const ItensCompraModel = require('../models/ItensCompraModel');
 
 
 class ComprasController{
@@ -45,7 +47,28 @@ class ComprasController{
     }
 
     async cadastrarCompra(req, res){
-        console.log(req.body)
+        let dadosNota = req.body[0];
+        let itensNota = req.body[1];
+
+        let compra = new CompraModel(dadosNota.cnpj, dadosNota.numNota, dadosNota.dataNota, dadosNota.valorNota, dadosNota.desconto);
+        compra = await compra.gravarCompra();
+
+        if(compra){
+            for(let i = 0; i < itensNota.length; i++){
+                var itenscompra = new ItensCompraModel(itensNota[i].id, itensNota[i].quantidade, itensNota[i].valorUnitario);
+                itenscompra = await itenscompra.gravarItensCompra();
+            }
+
+            if(itenscompra){
+                res.send({ok: true, msg: "Compra gravada com sucesso!"});
+            }
+            else{
+                res.send({ok: false, msg: "Erro ao gravar compra!"});
+            }
+        }
+        else{
+            res.send({ok: false, msg: "Erro ao gravar compra!"});
+        }
     }
 }
 

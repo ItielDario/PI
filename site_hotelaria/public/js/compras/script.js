@@ -5,6 +5,7 @@ const cnpj = document.querySelector('#cnpj');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let valorComDesconto = 0;
+cnpj.focus();
 
 
 // DADOS DA NOTA
@@ -48,7 +49,6 @@ btnBuscar.addEventListener('click', () => {
                     alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
                 }, 200);
             }
-            
         });
     }
 });
@@ -85,7 +85,7 @@ function adicionarProduto(){
         .then(function(resposta2) {
             if(resposta2.ok){
                 setTimeout(() => {
-                    alertProdutos.innerHTML = `<div class="alert alert-primary">TAÍ MEU CUMPADE</div>`
+                    alertProdutos.innerHTML = `<div class="alert alert-primary">Produto adicionado na lista!</div>`
                 }, 200);
                 setTimeout(() => {
                     alertProdutos.innerHTML = ''
@@ -214,7 +214,6 @@ btnGravar.addEventListener('click', () => {
         else{
             const dadosNota = {
                 cnpj: cnpj.value,
-                nome: nome.value,
                 numNota: numNota.value,
                 dataNota: dataNota.value,
                 valorNota: valorNota.value,
@@ -235,15 +234,28 @@ btnGravar.addEventListener('click', () => {
             })
             .then(function(resposta2) {
                 if(resposta2.ok){
-                    document.querySelector('#nome').value = resposta2.msg;
-                    
+                    setTimeout(() => {
+                        alertDados.innerHTML = `<div class="alert alert-primary">${resposta2.msg}</div>`
+                    }, 200);
+                    setTimeout(() => {
+                        alertDados.innerHTML = '';
+                    }, 5000);
+
+                    cnpj.value = '';
+                    cnpj.focus();
+                    nome.value = '';
+                    numNota.value = '';
+                    dataNota.value = '';
+                    valorNota.value = '';
+                    desconto.value = 0;
+                    listaProdutos = [];
+                    exibirTabela();
                 }
                 else{
                     setTimeout(() => {
                         alertDados.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
                     }, 200);
                 }
-                
             });
         }
     }
