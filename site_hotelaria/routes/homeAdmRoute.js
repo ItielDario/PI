@@ -3,6 +3,7 @@ const HomeAdmController = require('../controllers/homeAdmController');
 const ProdutosController = require('../controllers/produtosController');
 const fornecedorController = require('../controllers/fornecedorController');
 const ComprasController = require('../controllers/comprasController');
+const RelatorioController = require('../controllers/relatorioController');
 
 class HomeAdmRoute {
 
@@ -18,8 +19,9 @@ class HomeAdmRoute {
         this.#router = express.Router();
         let ctrlHome = new HomeAdmController();
         let ctrlProduto = new ProdutosController();
-        let ctrlFornecedor = new fornecedorController()
-        let ctrlCompras = new ComprasController()
+        let ctrlFornecedor = new fornecedorController();
+        let ctrlCompras = new ComprasController();
+        let ctrlRelatorio = new RelatorioController();
 
         this.#router.get('/', ctrlHome.homeView);
 
@@ -44,6 +46,9 @@ class HomeAdmRoute {
         this.#router.post("/compras/cadastrar", ctrlCompras.cadastrarCompra);
         this.#router.post("/compras/buscar", ctrlCompras.buscarCNPJ);
         this.#router.post("/compras/buscar/produto", ctrlCompras.buscarProduto);
+
+        // RELATORIOS
+        this.#router.get("/relatorio-geral", ctrlRelatorio.relatorioView);
         
     }
 }

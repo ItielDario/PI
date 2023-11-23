@@ -36,7 +36,6 @@ class ComprasController{
                 res.send({ok: true, msg: produto[0].pro_nome});
             }
             else{
-                console.log('false');
                 res.send({ok: false, msg: "Produto não cadastrado!"});
             }
             
