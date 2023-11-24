@@ -85,6 +85,17 @@ class ProdutosModel {
 
         return result;
     }
+
+    async alterarQuantidadeProduto(id, estoque) {
+        let sql = 'update tb_produto set pro_estoque = ? where pro_cod = ?';
+        let valores = [estoque, id];
+        let result = await conexao.executaltarComandoCUD(sql, valores);
+
+        let a = await this.visualisarProduos()
+
+        return result;
+
+    }
 }
 
 module.exports = ProdutosModel;

@@ -12,6 +12,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/css/adminlte.min.css">
   <link rel="stylesheet" href="/css/listar.css">
+  <link rel="stylesheet" href="/css/print.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -119,16 +120,22 @@
     <section class="content">
       <div class="container-fluid">
         <div class="card shadow" style="    padding: 20px;min-height: 700px;">
-            <header class="container"> 
+            <header class="container">
+              <section class="teste">
                 <h1>Lista de fornecedores</h1>
+
+                <div class="text-right exportButtons">
+                  <button id="exportPDF" class="btn btn-primary" style="font-weight: 400;">Exportar PDF</button>
+                  <button id="exportEXCEL" class="btn btn-primary" style="font-weight: 400;">Exportar EXCEL</button>
+                </div>
         
-                <table class="table table-striped">
+                <table class="table table-striped relatGeral">
                     <thead class="table-info">
                         <tr>
                             <th>CNPJ</th>
                             <th>Fone</th>
                             <th>Razão social</th>
-                            <th>Ações</th>
+                            <th class="acoes">Ações</th>
                         </tr>
                     </thead>
         
@@ -151,6 +158,7 @@
                 <div class="box-buttons">
                     <a href="/adm/fornecedor/cadastrar" class="btn btn-success">Cadastrar fornecedor</a>
                 </div>
+              </section> 
             </header>
         </div>
     <!-- /.content -->
@@ -171,7 +179,10 @@
 <script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/js/adminlte.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="/js/fornecedores/excluir.js"></script>
+<script src="/js/relatorios/index.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>

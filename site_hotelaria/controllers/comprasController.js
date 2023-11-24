@@ -56,6 +56,12 @@ class ComprasController{
             for(let i = 0; i < itensNota.length; i++){
                 var itenscompra = new ItensCompraModel(itensNota[i].id, itensNota[i].quantidade, itensNota[i].valorUnitario);
                 itenscompra = await itenscompra.gravarItensCompra();
+
+                let produto = new ProdutosModel();
+                let produtoResult = await produto.obterProduto(itensNota[i].id);
+                let novoEstoque = produtoResult[0].pro_estoque + Number(itensNota[i].quantidade);
+
+                produto.alterarQuantidadeProduto(itensNota[i].id, novoEstoque)
             }
 
             if(itenscompra){

@@ -10,9 +10,11 @@
   <!-- Font Awesome -->
   <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <!-- Theme style -->
+  
   <link rel="stylesheet" href="/css/adminlte.min.css">
   <link rel="stylesheet" href="/css/compras.css">
   <link rel="stylesheet" href="/css/listar.css">
+  <link rel="stylesheet" href="/css/print.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -119,38 +121,57 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="card shadow" style="    padding: 20px;min-height: 700px;">
-            <header class="container"> 
+        <div class="card shadow" style="padding: 20px;min-height: 700px;">
+            <header class="container-fluid"> 
                 <h1>Relatório Geral</h1>
+              
+                  <hr>
+                  <div class="form-group sCriteria"> 
+                      <fieldset>
+                          <legend>Critério de Busca</legend>
+                          <label class="mr-3 align-middle" style="font-weight: 400; font-size: 22px;"><input value="all" type="radio" name="searchCriteria" checked> Todos</label>
+                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="orderNumber" type="radio" name="searchCriteria" style="margin-bottom: 3px;"> ID do Pedido</label>
+                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="productName" type="radio" name="searchCriteria"> Nome do Produto</label>
+                      </fieldset>
+                  </div>
+                  <div class="form-group sInput">
+                      <div class="input-group mb-3">
+                          <input placeholder="Digite o Termo" class="form-control" style="font-weight: 400; height: 47px;" type="text" id="inputSearch">
+                          <div>
+                              <button class="btn btn-primary mt-0 " style="font-weight: 400;" type="button" id="btnSearch"><i class="fas fa-search"></i> Buscar</button>
+                          </div>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="text-right exportButtons">
+                      <button id="exportPDF" class="btn btn-primary" style="font-weight: 400;">Exportar PDF</button>
+                      <button id="exportEXCEL" class="btn btn-primary" style="font-weight: 400;">Exportar EXCEL</button>
+                  </div>
 
-                <br>
-                <hr>
-                <br>
-
-                <table class="table table-striped">
-                  <thead class="table-info" style="text-align: center;">
-                      <tr>
-                          <th>ID</th>
-                          <th>Fornecedor</th>
-                          <th>Produto</th>
-                          <th>Quantidade</th>
-                          <th>Valor Unitário</th>
-                          <th>Data da Compra</th>
-                          <th>Desconto</th>
+                <table class="table table-striped relatGeral">
+                  <thead class="table-info" >
+                      <tr class="align-middle text-center font-weight-bold">
+                          <th class="align-middle">ID</th>
+                          <th class="align-middle">Fornecedor</th>
+                          <th class="align-middle">Produto</th>
+                          <th class="align-middle">Quantidade</th>
+                          <th class="align-middle">Valor Unitário</th>
+                          <th class="align-middle">Data da Compra</th>
+                          <th class="align-middle">Desconto</th>
                       </tr>
                   </thead>
       
                   <tbody style="text-align: center;">
                       <% for(let i = 0; i < lista.length; i++) { %>
-                          <tr>
+                          <tr class="align-middle text-center">
                               <!-- p.pro_nome, i.ite_quantidade, i.ite_valor_uni, c.com_valor_total, c.com_data, c.com_desconto -->
-                              <th><%= lista[i].ite_com_cod %></th>
-                              <th><%= lista[i].for_razao_social %></th>
-                              <th><%= lista[i].pro_nome %></th>
-                              <th><%= lista[i].ite_quantidade %></th>
-                              <th>R$ <%= (lista[i].ite_valor_uni) %></th>
-                              <th><%= lista[i].com_data %></th>
-                              <th><%= lista[i].com_desconto %></th>
+                              <td class="" style="font-weight: 400;"><%= lista[i].ite_com_cod %></td>
+                              <td class="align-middle" style="font-weight: 400;"><%= lista[i].for_razao_social %></td>
+                              <td class="align-middle" style="font-weight: 400;"><%= lista[i].pro_nome %></td>
+                              <td class="align-middle" style="font-weight: 400;"><%= lista[i].ite_quantidade %></td>
+                              <td class="align-middle" style="font-weight: 400;">R$ <%= (lista[i].ite_valor_uni) %></td>
+                              <td class="align-middle" style="font-weight: 400;"><%= lista[i].com_data %></td>
+                              <td class="align-middle" style="font-weight: 400;"><%= lista[i].com_desconto %></td>
                           </tr>
                       <% } %>
                   </tbody>
@@ -173,10 +194,12 @@
 <script src="/js/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <!-- Bootstrap 4 -->
-<script src="/js/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/js/adminlte.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="/js/compras/script.js"></script>
+<script src="/js/relatorios/index.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 </body>
 </html>

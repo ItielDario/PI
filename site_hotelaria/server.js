@@ -16,7 +16,7 @@ var mysql = require('mysql2');
 
 const app = express();
 const host = 'localhost';
-const port = '5000';
+const port = '5002';
 
 app.set('View', './views');
 app.set('layout', './layout');

@@ -12,6 +12,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/css/adminlte.min.css">
   <link rel="stylesheet" href="/css/listar.css">
+  <link rel="stylesheet" href="/css/print.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -121,16 +122,23 @@
         <div class="card shadow" style="    padding: 20px;min-height: 700px;">
             <!-- ##### Listar Produtos Start ##### -->
             <header class="container">
+              <section class="teste">
+
                 <h1>Lista de produtos</h1>
 
-                <table class="table table-striped">
+                <div class="text-right exportButtons">
+                  <button id="exportPDF" class="btn btn-primary" style="font-weight: 400;">Exportar PDF</button>
+                  <button id="exportEXCEL" class="btn btn-primary" style="font-weight: 400;">Exportar EXCEL</button>
+                </div>
+
+                <table class="table table-striped relatGeral">
                     <thead class="table-info"> 
                         <th>Id</th>
                         <th>Nome</th>
                         <th>Descrição</th>
                         <th>Preço</th>
                         <th>Estoque</th>
-                        <th>Ações</th>
+                        <th class="acoes">Ações</th>
                     </thead>
                     <tbody>
                         <% for(let i=0; i<listaProdutos.length; i++) { %>
@@ -140,7 +148,7 @@
                                 <td><%= listaProdutos[i].pro_descricao %></td>
                                 <td><%= listaProdutos[i].pro_preco %></td>
                                 <td><%= listaProdutos[i].pro_estoque %></td>
-                                <th>
+                                <th class="acoes">
                                     <a href="/adm/produto/alterar/<%= listaProdutos[i].pro_cod %>" class="btn-alterar"><img  src="/img/btn_editar.png" alt="Botão de editar"></a>
                                     <a class="btn-excluir" id="<%= listaProdutos[i].pro_cod %>"><img id="<%= listaProdutos[i].pro_cod %>" src="/img/btn_excluir.png" alt="Botão de exluir"></a>
                                 </th>
@@ -152,6 +160,7 @@
                 <div class="box-buttons">
                     <a href="/adm/produto/adicionar" class="btn btn-success">Cadastrar produto</a>
                 </div>
+              </section>
             </header>
             <!-- ##### Listar Produtos End ##### -->
         </div>
@@ -177,6 +186,10 @@
 <!-- AdminLTE App -->
 <script src="/js/adminlte.min.js"></script>
 <script src="/js/produtos/excluirProdutos.js"></script>
+<script src="/js/relatorios/index.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>
 

@@ -49,6 +49,7 @@ class HomeAdmRoute {
 
         // RELATORIOS
         this.#router.get("/relatorio-geral", ctrlRelatorio.relatorioView);
+        this.#router.post('/relatorio-geral/filter', ctrlRelatorio.filter);
         
     }
 }

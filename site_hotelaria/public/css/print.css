@@ -1,0 +1,11 @@
+@media print {
+    .logoPrint{
+        display:block;
+    }
+
+    .exportButtons, .sCriteria, .sInput, .h1Print, .box-buttons, .btn-excluir, .btn-alterar, .acoes {
+        display: none;
+      }
+}
+
+  

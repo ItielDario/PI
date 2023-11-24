@@ -109,3 +109,15 @@ table{
 .valor-total-produto{
     margin-right: 5vw;
 }
+
+@media only screen and (min-width: 1600px) {
+    .teste{
+        margin: 0 -7vw;
+    }
+}
+
+@media only screen and (min-width: 2400px) {
+    .teste{
+        margin: 0 -18vw;
+    }
+}
