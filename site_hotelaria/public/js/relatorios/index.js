@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function tableFilter() { 
-
         var searchCriteria = document.querySelector('input[name="searchCriteria"]:checked').value;
         var searchTerm = document.querySelector('#inputSearch').value;
 
