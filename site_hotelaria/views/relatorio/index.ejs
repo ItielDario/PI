@@ -124,20 +124,29 @@
         <div class="card shadow" style="padding: 20px;min-height: 700px;">
             <header class="container-fluid"> 
                 <h1>Relatório Geral</h1>
-              
                   <hr>
                   <div class="form-group sCriteria">
-
                       <fieldset>
-                          <legend>Critério de Busca</legend>
-                          <label class="mr-3 align-middle" style="font-weight: 400; font-size: 22px;"><input value="all" type="radio" name="searchCriteria" checked> Todos</label>
-                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="orderNumber" type="radio" name="searchCriteria" style="margin-bottom: 3px;"> ID do Pedido</label>
-                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="productName" type="radio" name="searchCriteria"> Nome do Produto</label>
+                        <legend>Critério de Busca</legend>
+                        <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input class="criter" value="all" type="radio" name="searchCriteria" checked> Todos</label>
+                        <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input class="criter" value="orderNumber" type="radio" name="searchCriteria" style="margin-bottom: 3px;"> ID do Pedido</label>
+                        <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input class="criter" value="productName" type="radio" name="searchCriteria"> Nome do Produto</label>
                       </fieldset>
+                      <fieldset class="dataFilter">
+                        <hr>
+                        <legend>FIltro de data</legend>
+                        <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="allDates" class="selDate" type="radio" name="searchDate" checked> Todas as datas</label>
+                        <label class="mr-3" style="font-weight: 400; font-size: 22px;"><input value="selectedDate" class="selDate" type="radio" name="searchDate"> Selecionar data</label>
+                        <div>
+                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"></label>Inicio <input type="date" class="date-picker-in" disabled required></label>
+                          <label class="mr-3" style="font-weight: 400; font-size: 22px;"></label>Fim <input type="date" class="date-picker-out" disabled required></label>
+                        </div>
+                      </fieldset>
+                      <hr>
                   </div>
                   <div class="form-group sInput">
                       <div class="input-group mb-3">
-                          <input placeholder="Digite o Termo" class="form-control" style="font-weight: 400; height: 47px;" type="text" id="inputSearch">
+                          <input placeholder="Digite o Termo" class="form-control searchField" style="font-weight: 400; height: 47px;" type="text" id="inputSearch" disabled>
                           <div>
                               <button class="btn btn-primary mt-0 " style="font-weight: 400;" type="button" id="btnSearch"><i class="fas fa-search"></i> Buscar</button>
                           </div>
