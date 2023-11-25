@@ -16,7 +16,7 @@ class LoginRoute {
         this.#router = express.Router();
         let ctrl = new LoginController();
         this.#router.get('/', ctrl.loginView);
-        this.#router.get("/logout", ctrl.logout);
+        this.#router.get('/logout', ctrl.logout);
         this.#router.post('/', ctrl.autenticar)
     }
 }
