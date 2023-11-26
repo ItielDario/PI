@@ -59,6 +59,20 @@ class ProdutosModel {
 
     // Adicionar Produto
     async adicionarProduto() {
+        //Validar se o produto já esta cadastrado
+        let sqlNome = 'select * from tb_produto where pro_nome = ?'
+        let valoresNome = [this.#produtoNome];
+        let rowsNome = await conexao.executaltarComandoR(sqlNome, valoresNome);
+        let x = 0;
+        if(rowsNome.length > 0) { 
+            let produto = rowsNome;
+            x++;
+        }
+        if(x!=0)
+        {
+            return 0;
+        }
+        else
         if(this.#produtoId == 0) {
             let sql = 'insert into tb_produto (pro_nome, pro_descricao, pro_estoque, pro_preco) values (?, ?, ?, ?)';
             let valores = [this.#produtoNome, this.#produtoDescricao, this.#produtoQtd, this.#produtoPreco];
