@@ -96,7 +96,7 @@ class UsuarioModel {
 
             return usuario;
         }
-
+        else
         return null;
     }
 
@@ -172,7 +172,7 @@ class UsuarioModel {
         if(rows.length > 0) {
             return new UsuarioModel(rows[0]["usu_id"], rows[0]["usu_nome"], rows[0]["usu_email"], rows[0]["usu_ativo"], rows[0]["usu_senha"], rows[0]["per_id"])
         }
-        
+        else
         return null;
     }
 }
