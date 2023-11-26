@@ -153,9 +153,16 @@ function validarCampos(produto, quantidade, valorUni){
     }
 }
 
+function adicionarEventosExcluir() {
+    const btnExcluir = document.querySelectorAll('.btn-excluir');
+    btnExcluir.forEach(btn => {
+        btn.addEventListener('click', excluir);
+    });
+}
+
 function exibirTabela(listaProdutos){
-    const tabelaProdutos = document.querySelector('#lista-produtos');
-    const valorTotalProduto = document.querySelector('.valor-total-produtos');
+    let tabelaProdutos = document.querySelector('#lista-produtos');
+    let valorTotalProduto = document.querySelector('.valor-total-produtos');
     tabelaProdutos.innerHTML = '';
     valorTotalCompra = 0;
 
@@ -176,6 +183,7 @@ function exibirTabela(listaProdutos){
     }
 
     valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorTotalCompra.toFixed(2)} </h3>`;
+    adicionarEventosExcluir();
 }
 
 function excluir(evt){
@@ -191,6 +199,8 @@ function excluir(evt){
 
     listaProdutos = vetAux;
     exibirTabela(listaProdutos);
+
+    valorComDesconto = valorTotalCompra - desconto.value;
 }
 
 
