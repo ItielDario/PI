@@ -149,7 +149,7 @@
                         <th class="acoes">Ações</th>
                     </thead>
                     <tbody>
-                        <% for(let i=0; i<listaProdutos.length; i++) { %>
+                        <% for (let i = listaProdutos.length - 1; i >= 0; i--) { %>
                             <tr>
                                 <td><%= listaProdutos[i].pro_cod %></td>
                                 <td><%= listaProdutos[i].pro_nome %></td>
