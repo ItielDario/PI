@@ -25,7 +25,10 @@ class ProdutosController {
             
             let produto = new ProdutosModel(0, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto);
             let retorno = await produto.adicionarProduto();
-            if(retorno == true) {
+            if(retorno == 0) {
+                res.send({ok: false, msg: 'Produto já cadastrado'});
+            }
+            else if(retorno == true) {
                 res.send({ok: true, msg: 'Produto adicionado com sucesso'});
             }
             else {
@@ -56,7 +59,10 @@ class ProdutosController {
             let produto = new ProdutosModel(req.body.idProduto, req.body.nomeProduto, req.body.descricaoProduto, req.body.precoProduto, req.body.qtdProduto);
             let retorno = await produto.adicionarProduto();
 
-            if(retorno == true) {
+            if(retorno == 0) {
+                res.send({ok: false, msg: 'Já existe um produto cadastrado com este nome'});
+            }
+            else if(retorno == true) {
                 res.send({ok: true, msg: 'Dados atualizados'});
             }
             else {
