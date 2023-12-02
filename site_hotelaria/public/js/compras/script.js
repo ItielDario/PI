@@ -2,6 +2,7 @@ const btnAdicionar = document.querySelector('#btn-adicionar');
 const btnBuscar = document.querySelector('#btn-cnpj');
 const btnGravar = document.querySelector('#btn-gravar');
 const cnpj = document.querySelector('#cnpj');
+let razaoSocial = document.querySelector('#nome');
 let listaProdutos = [];
 let valorTotalCompra = 0;
 let valorComDesconto = 0;
@@ -14,13 +15,14 @@ cnpj.addEventListener('input', function (e) {
     e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
 });
 
-btnBuscar.addEventListener('click', () => { 
+cnpj.addEventListener('blur', () => { 
     const alertDados = document.querySelector('#alert-msg-dados');
     alertDados.innerHTML = ''
 
     if(cnpj.value.length != 18){
         setTimeout(() => {
             alertDados.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+            razaoSocial.value = ''
         }, 200);
     }
     else{ 
@@ -67,65 +69,73 @@ function adicionarProduto(){
     alertProdutos.innerHTML = '';
 
     if(validarCampos(produto.value, quantidade.value, valorUni.value)){
+        const produtoExistente = listaProdutos.find(item => item.id === produto.value)
+        if(!produtoExistente){
+            const id = {
+                id: produto.value,
+            }
 
-        const id = {
-            id: produto.value,
+            fetch('/adm/compras/buscar/produto', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                }, 
+                body: JSON.stringify(id)
+            })
+            .then(function(resposta1) {
+                return resposta1.json()
+            })
+            .then(function(resposta2) {
+                if(resposta2.ok){
+                    setTimeout(() => {
+                        alertProdutos.innerHTML = `<div class="alert alert-primary">Produto adicionado na lista!</div>`
+                    }, 200);
+                    setTimeout(() => {
+                        alertProdutos.innerHTML = ''
+                    }, 3000);
+
+                    let totalProduto = Number((valorUni.value * quantidade.value));
+            
+                    listaProdutos.push({
+                        id: `${produto.value}`,
+                        produto: `${resposta2.msg}`,
+                        quantidade: `${quantidade.value}`,
+                        valorUnitario: (valorUni.value * 1).toFixed(2),
+                        valorTotalProduto: totalProduto.toFixed(2)
+                    });
+            
+                    exibirTabela(listaProdutos);
+
+                    produto.value = '';
+                    produto.focus();
+                    quantidade.value = '';
+                    valorUni.value = '';
+            
+                    desconto.addEventListener('keyup', () => {
+                        valorComDesconto = valorTotalCompra - desconto.value;
+            
+                        valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorComDesconto.toFixed(2)} </h3>`;
+                    })
+            
+                    const btn = document.querySelectorAll(`.btn-excluir`);
+                    for(let i = 0; i < btn.length; i++){
+                        btn[i].addEventListener('click', excluir);
+                    }
+                }
+                else{
+                    setTimeout(() => {
+                        alertProdutos.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
+                    }, 200);
+                }
+            
+            });
+        }
+        else{
+            setTimeout(() => {
+                alertProdutos.innerHTML = `<div class="alert alert-danger">Este produto já foi adicionado</div>`
+            }, 200);
         }
 
-        fetch('/adm/compras/buscar/produto', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            }, 
-            body: JSON.stringify(id)
-        })
-        .then(function(resposta1) {
-            return resposta1.json()
-        })
-        .then(function(resposta2) {
-            if(resposta2.ok){
-                setTimeout(() => {
-                    alertProdutos.innerHTML = `<div class="alert alert-primary">Produto adicionado na lista!</div>`
-                }, 200);
-                setTimeout(() => {
-                    alertProdutos.innerHTML = ''
-                }, 3000);
-
-                let totalProduto = Number((valorUni.value * quantidade.value));
-        
-                listaProdutos.push({
-                    id: `${produto.value}`,
-                    produto: `${resposta2.msg}`,
-                    quantidade: `${quantidade.value}`,
-                    valorUnitario: (valorUni.value * 1).toFixed(2),
-                    valorTotalProduto: totalProduto.toFixed(2)
-                });
-        
-                exibirTabela(listaProdutos);
-
-                produto.value = '';
-                produto.focus();
-                quantidade.value = '';
-                valorUni.value = '';
-        
-                desconto.addEventListener('keyup', () => {
-                    valorComDesconto = valorTotalCompra - desconto.value;
-        
-                    valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorComDesconto.toFixed(2)} </h3>`;
-                })
-        
-                const btn = document.querySelectorAll(`.btn-excluir`);
-                for(let i = 0; i < btn.length; i++){
-                    btn[i].addEventListener('click', excluir);
-                }
-            }
-            else{
-                setTimeout(() => {
-                    alertProdutos.innerHTML = `<div class="alert alert-danger">${resposta2.msg}</div>`
-                }, 200);
-            }
-            
-        });
     }
     else{
         setTimeout(() => {
@@ -143,9 +153,16 @@ function validarCampos(produto, quantidade, valorUni){
     }
 }
 
+function adicionarEventosExcluir() {
+    const btnExcluir = document.querySelectorAll('.btn-excluir');
+    btnExcluir.forEach(btn => {
+        btn.addEventListener('click', excluir);
+    });
+}
+
 function exibirTabela(listaProdutos){
-    const tabelaProdutos = document.querySelector('#lista-produtos');
-    const valorTotalProduto = document.querySelector('.valor-total-produtos');
+    let tabelaProdutos = document.querySelector('#lista-produtos');
+    let valorTotalProduto = document.querySelector('.valor-total-produtos');
     tabelaProdutos.innerHTML = '';
     valorTotalCompra = 0;
 
@@ -166,11 +183,12 @@ function exibirTabela(listaProdutos){
     }
 
     valorTotalProduto.innerHTML = `<h3>Valor total: R$ ${valorTotalCompra.toFixed(2)} </h3>`;
+    adicionarEventosExcluir();
 }
 
 function excluir(evt){
     let str = evt.target.id;
-    const idProdutoEvt = str.replace(/[^0-9]/g, '');
+    let idProdutoEvt = str.replace(/[^0-9]/g, '');
 
     let vetAux = [];
     for(let i = 0; i < listaProdutos.length; i++){
@@ -181,6 +199,8 @@ function excluir(evt){
 
     listaProdutos = vetAux;
     exibirTabela(listaProdutos);
+
+    valorComDesconto = valorTotalCompra - desconto.value;
 }
 
 

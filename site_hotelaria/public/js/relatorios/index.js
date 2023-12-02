@@ -22,6 +22,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 
+    var selDate = document.querySelectorAll('.selDate');
+    
+    selDate.forEach(function(value, index){
+            value.addEventListener('click', enableDataPicker);
+        })
+    
+    function enableDataPicker() {
+   
+        if(this.value == 'selectedDate') {
+            document.querySelector('.date-picker-in').removeAttribute('disabled');
+            document.querySelector('.date-picker-out').removeAttribute('disabled');
+        }
+        if(this.value == 'allDates'){
+            document.querySelector('.date-picker-in').value = '';
+            document.querySelector('.date-picker-out').value = '';
+            document.querySelector('.date-picker-in').setAttribute('disabled', '');
+            document.querySelector('.date-picker-out').setAttribute('disabled', '');
+        }
+    }
+
+    var criter = document.querySelectorAll('.criter');
+    
+    criter.forEach(function(value, index){
+            value.addEventListener('click', enableSearchField);
+        })
+    
+    function enableSearchField() {
+   
+        if(this.value == 'all') {
+            document.querySelector('.searchField').value = '';
+            document.querySelector('.searchField').setAttribute('disabled', '');
+        }
+        if(this.value == 'orderNumber')
+            document.querySelector('.searchField').removeAttribute('disabled');
+        if(this.value == 'productName')
+            document.querySelector('.searchField').removeAttribute('disabled');
+        
+    }
+
     document.querySelector('#btnSearch').addEventListener('click', tableFilter);
 
     function mountOrders(list) {
@@ -52,11 +91,16 @@ document.addEventListener('DOMContentLoaded', function() {
         var searchCriteria = document.querySelector('input[name="searchCriteria"]:checked').value;
         var searchTerm = document.querySelector('#inputSearch').value;
 
+        var dateIn = new Date();
+        var dateOut = new Date();
+        dateIn = document.querySelector('.date-picker-in').value;
+        dateOut = document.querySelector('.date-picker-out').value;
+
         fetch('/adm/relatorio-geral/filter', {
 
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({criteria: searchCriteria, term: searchTerm})
+            body: JSON.stringify({criteria: searchCriteria, term: searchTerm, dateIn: dateIn, dateOut: dateOut})
 
         })
         .then(r => {

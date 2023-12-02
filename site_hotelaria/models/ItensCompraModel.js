@@ -49,7 +49,7 @@ class ItensCompraModel {
         return lista;
     }
 
-    async ordersFilter(searchCriteria, searchTerms) {
+    async ordersFilter(searchCriteria, searchTerms, dateIn, dateOut) {
 
         let sqlWhere = '';
         
@@ -60,28 +60,31 @@ class ItensCompraModel {
 
             sqlWhere = ` WHERE i.ite_com_cod = ${searchTerms} `;
 
+            if (dateIn != null && dateIn != 'empty' && dateOut != null && dateOut != 'empty') {
+                sqlWhere += ` AND com_data BETWEEN '${dateIn}' AND '${dateOut}' `;
+            }
+
         }
 
         if(searchCriteria == 'productName' && searchTerms != null) {
 
             sqlWhere = ` WHERE p.pro_nome LIKE '%${searchTerms}%' `;
+            
+            if (dateIn != null && dateIn != 'empty' && dateOut != null && dateOut != 'empty') {
+                sqlWhere += ` AND com_data BETWEEN '${dateIn}' AND '${dateOut}' `;
+            }
 
         }
 
-        `select
-        i.ite_com_cod,
-        f.for_razao_social,
-        p.pro_nome,
-        i.ite_quantidade,
-        i.ite_valor_uni,
-        c.com_valor_total,
-        c.com_data,
-        c.com_desconto
-        FROM tb_itens_compra i
-        INNER JOIN tb_compra c on i.ite_com_cod = c.com_cod
-        INNER JOIN tb_produto p on i.ite_pro_cod = p.pro_cod
-        INNER JOIN tb_fornecedor f on c.com_for_cnpj = f.for_cnpj
-        ORDER BY i.ite_com_cod asc`
+        if(searchCriteria == 'all') {
+
+            sqlWhere = ` `;
+            
+            if (dateIn != null && dateIn != 'empty' && dateOut != null && dateOut != 'empty') {
+                sqlWhere = ` WHERE com_data BETWEEN '${dateIn}' AND '${dateOut}' `;
+            }
+
+        }
 
         let sql = `SELECT
         i.ite_com_cod,
