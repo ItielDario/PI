@@ -63,6 +63,7 @@ function adicionarProduto(){
     const alertProdutos = document.querySelector('#alert-msg-produtos');
     const desconto = document.querySelector('#desconto');
     const produto = document.querySelector('#produto');
+    console.log(produto.value);
     const quantidade = document.querySelector('#quantidade');
     const valorUni = document.querySelector('#valor-uni');
     const valorTotalProduto = document.querySelector('.valor-total-produtos');
@@ -106,10 +107,10 @@ function adicionarProduto(){
             
                     exibirTabela(listaProdutos);
 
-                    produto.value = '';
                     produto.focus();
                     quantidade.value = '';
                     valorUni.value = '';
+
             
                     desconto.addEventListener('keyup', () => {
                         valorComDesconto = valorTotalCompra - desconto.value;

@@ -6,8 +6,10 @@ const ItensCompraModel = require('../models/ItensCompraModel');
 
 class ComprasController{
 
-    comprasView(req, res){
-        res.render('compras/index', {layout: 'compras/index'});
+    async comprasView(req, res){
+        let produto = new ProdutosModel();
+        let listaProdutos = await produto.visualisarProduos()
+        res.render('compras/index', {layout: 'compras/index', lista: listaProdutos});
     }
 
     async buscarCNPJ(req, res){
