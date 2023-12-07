@@ -5,7 +5,7 @@ tel.addEventListener('change', (e) => mascaraTelefone(e.target.value));
 const mascaraTelefone = (valor) => {
     valor = valor.replace(/\D/g, "");
     valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
-    valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");
+    valor = valor.replace(/(\d)(\d{4})$/, "$1-$2"); 
     tel.value = valor ;
 }
 
@@ -22,6 +22,9 @@ btnCadastrar.addEventListener('click', () => {
     const nome = document.querySelector('#nome');
     const alert = document.querySelector('#alert-msg');
     alert.innerHTML = '';
+    cnpj.style["border-color"] = "";
+    fone.style["border-color"] = "";
+    nome.style["border-color"] = "";
 
     if(validarCNPJ(cnpj.value)){
         if(validarCampos(cnpj.value,fone.value, nome.value)){
@@ -68,7 +71,7 @@ btnCadastrar.addEventListener('click', () => {
     }   
     else{
         setTimeout(() => {
-            alert.innerHTML = `<div class="alert alert-danger">O CNPJ esta incorreto!</div>`
+            alert.innerHTML = `<div class="alert alert-danger">O CNPJ está incorreto!</div>`
         }, 200);
     }
 

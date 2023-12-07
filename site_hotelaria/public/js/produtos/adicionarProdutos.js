@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let descricaoProduto = document.querySelector('#descricaoProduto');
         let precoProduto = document.querySelector('#precoProduto');
         let qtdProduto = document.querySelector('#qtdProduto');
-        const alert = document.querySelector('#alert-msg');
+        const alert = document.querySelector('#alert-msg'); 
 
         if(validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto)) {
 
@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
         }
+        else{
+            setTimeout(() => {
+                alert.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+            }, 200);
+        }
     }
     function validar(nomeProduto, descricaoProduto, precoProduto, qtdProduto) {
 
@@ -68,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(erros.length > 0) {
             for(let i = 0; i<erros.length; i++){
-                erros[i].style["border-color"] = "red";
+                erros[i].style["border-color"] = "";
             }
             setTimeout(() => {
                 alert.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`

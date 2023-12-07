@@ -46,6 +46,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
         }
+        else{
+            setTimeout(() => {
+                alert.innerHTML = `<div class="alert alert-danger">Por favor, preencha os campos corretamente!</div>`
+            }, 200);
+        }
     }
     function validar(idProduto, nomeProduto, descricaoProduto, precoProduto, qtdProduto) {
 
@@ -69,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(erros.length > 0) {
             for(let i = 0; i<erros.length; i++){
-                erros[i].style["border-color"] = "red";
+                erros[i].style["border-color"] = "";
             }
 
             setTimeout(() => {
